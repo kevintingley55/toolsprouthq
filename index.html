@@ -1,1 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ToolSprout</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f9f9f9; padding: 20px; text-align: center; }
+    .card, form { background: white; padding: 20px; margin: 20px auto; max-width: 500px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.05); }
+    h1 { color: #0077ff; }
+    button, input[type="submit"] {
+      background-color: #0077ff; color: white; padding: 10px 20px;
+      border: none; border-radius: 4px; cursor: pointer;
+    }
+    input[type="email"] {
+      padding: 10px; width: 80%; margin-bottom: 10px; border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    #thank-you {
+      display: none;
+      margin-top: 20px;
+      padding: 15px;
+      background: #e6ffe6;
+      color: #006600;
+      border: 1px solid #00cc00;
+      border-radius: 6px;
+    }
+    a.download-link {
+      display: inline-block;
+      margin-top: 10px;
+      text-decoration: none;
+      color: #0077ff;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>ToolSprout</h1>
+  <p>Discover AI Tools That Actually Work</p>
 
+  <div class="card">
+    <h2>Scalenut</h2>
+    <p>Long-form SEO & content planning</p>
+    <a href="https://scalenut.com/?fpr=kevin96" target="_blank"><button>Try Scalenut</button></a>
+  </div>
+
+  <form action="https://formspree.io/f/mrbkrngj" method="POST" onsubmit="showThankYou(event)">
+    <h3>💌 Get 10 Free ChatGPT Prompts to Save You Hours</h3>
+    <input type="email" name="email" placeholder="Enter your email" required><br>
+    <input type="submit" value="Get Free Prompts">
+  </form>
+
+  <div id="thank-you">
+    ✅ Thanks! Your free prompts are ready.<br>
+    👉 <a class="download-link" href="https://toolsprout.netlify.app/assets/10_chatgpt_prompts_toolsprout.pdf" target="_blank">Download Now</a>
+  </div>
+
+  <script>
+    function showThankYou(e) {
+      e.preventDefault();
+      const form = e.target;
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      }).then(response => {
+        if (response.ok) {
+          form.style.display = 'none';
+          document.getElementById('thank-you').style.display = 'block';
+        } else {
+          alert('Something went wrong. Try again later.');
+        }
+      });
+    }
+  </script>
+</body>
+</html>
